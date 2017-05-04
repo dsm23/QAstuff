@@ -1,0 +1,6 @@
+package stuff;
+
+public class Car {
+	int store = 6;
+	int fixrate = 2;
+}

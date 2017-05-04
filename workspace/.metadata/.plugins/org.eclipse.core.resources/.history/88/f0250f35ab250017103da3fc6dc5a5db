@@ -1,0 +1,32 @@
+package project;
+
+import java.io.*;
+import java.util.*;
+
+public class ATM {
+	
+	public void readFromFile(){
+		try {
+			  File x = new File("account.txt");
+			  Scanner sc = new Scanner(x);      
+		}
+		catch (FileNotFoundException e) {
+
+		}
+	}
+	
+	public void writeToFile(){
+		try {
+		    Formatter f = new Formatter("account.txt");
+		    f.format("%s %s %s", "1","John", "Smith \r\n");
+		    f.format("%s %s %s", "2","Amy", "Brown");
+		    f.close();    
+		  } catch (Exception e) {
+		    System.out.println("Error");
+		  }
+	}
+	
+	public static void main(String[] args){
+
+	}
+}

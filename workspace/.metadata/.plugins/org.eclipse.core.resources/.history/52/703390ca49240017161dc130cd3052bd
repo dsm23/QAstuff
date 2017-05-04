@@ -1,0 +1,6 @@
+package stuff;
+
+public class Motorcycle extends Vehicle {
+	store = 3;
+	fixrate = 1;
+}

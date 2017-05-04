@@ -1,0 +1,16 @@
+package JunitBlackjack;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class JunitTestOne {
+
+	@Test
+	public void test() {
+		JunitBlackjack J = new JunitBlackjack();
+		int result = J.calc(20, 18);
+		assertEquals(18, result);
+	}
+
+}

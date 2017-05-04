@@ -1,0 +1,19 @@
+package stuff;
+
+import java.util.*;
+
+public class Garage {
+
+	public static void main(String[] args) {
+		Vehicle B = new Bus();
+		Vehicle M = new Motorcycle();
+		Vehicle C = new Car();
+		ArrayList<Vehicle> arr = new ArrayList<Vehicle>();
+		arr.add(B);
+		arr.add(C);
+		arr.add(M);
+		for (Vehicle i : arr) {
+			System.out.println(i.store);
+		}
+	}
+}

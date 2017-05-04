@@ -1,0 +1,20 @@
+package FileNonsense;
+
+import java.util.*;
+
+public class WorkingwithFiles {
+
+	public static void main(String[ ] args) {
+		Person David = new Person("David","programmer",24);
+		Person James = new Person("James","accountant",25);
+		Person Emily = new Person("Emily","engineer",24);
+		Person John = new Person("John","dancer",22);
+		Person Grace = new Person("Grace","scientist",23);
+		
+		/*try {
+		  Formatter f = new Formatter("test.txt");
+		} catch (Exception e) {
+		    System.out.println("Error");
+		}*/
+	}
+}

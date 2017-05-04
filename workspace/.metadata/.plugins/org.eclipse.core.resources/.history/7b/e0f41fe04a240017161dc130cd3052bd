@@ -1,0 +1,13 @@
+package stuff;
+
+public class Garage {
+
+	public static void main(String[] args) {
+		Vehicle[] arr = new Vehicle[3];
+		Bus B = new Vehicle();
+		Motorcycle M = new Vehicle();
+		Car C = new Vehicle();
+		ArrayList<Vehicle> arr = new ArrayList<Vehicle>();
+		arr.add();
+	}
+}

@@ -1,0 +1,34 @@
+package stuff;
+
+import java.util.*;
+
+public class Garage {
+	/*public void addVehicle(){	
+		arr.add();
+	}
+	public void remove(){}
+	public void fix(){}
+	*/
+	public void empty(){
+		arr.clear();
+	}
+	
+	
+	public static void main(String[] args) {
+		Bus B = new Bus();
+		Motorcycle M = new Motorcycle();
+		Car C = new Car();
+		ArrayList<Vehicle> arr = new ArrayList<Vehicle>();
+		B.Change(9,3);
+		C.Change(6,2);
+		M.Change(3,1);
+		arr.add(B);
+		arr.add(C);
+		arr.add(M);
+		System.out.println(arr);
+		empty();
+		for (Vehicle i : arr) {
+			System.out.println(i.store);
+		}
+	}
+}

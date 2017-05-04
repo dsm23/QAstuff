@@ -1,0 +1,19 @@
+package FileNonsense;
+
+import java.util.*;
+
+public class ReadingScan {
+
+	public static void main(String[] args) {
+		try {
+		  File x = new File("C:\\sololearn\\test.txt");
+		  Scanner sc = new Scanner(x);
+		  String readfile = sc.next();
+		}
+		 catch (FileNotFoundException e) {
+			 System.out.println("Error");
+		}
+
+	}
+
+}

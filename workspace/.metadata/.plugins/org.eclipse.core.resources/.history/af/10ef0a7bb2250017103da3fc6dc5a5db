@@ -1,0 +1,16 @@
+package project;
+
+public class ATM {
+
+	public static void main(String[] args){
+		Address A = new Address();
+		float test = 74.50f;
+		A.writeToFile(test);
+		A.readFromFile();
+		
+		if (A.withdraw(amount)< test){
+			amount - test;
+		}
+			
+	}
+}

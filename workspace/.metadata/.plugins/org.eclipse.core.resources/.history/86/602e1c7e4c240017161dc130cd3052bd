@@ -1,0 +1,21 @@
+package stuff;
+
+import java.util.*;
+
+public class Garage {
+
+	public static void main(String[] args) {
+		Bus B = new Bus();
+		Motorcycle M = new Motorcycle();
+		Car C = new Car();
+		ArrayList<Vehicle> arr = new ArrayList<Vehicle>();
+		B.Change();
+		arr.add(B);
+		arr.add(C);
+		arr.add(M);
+		System.out.println(arr);
+		for (Vehicle i : arr) {
+			System.out.println(i.store);
+		}
+	}
+}

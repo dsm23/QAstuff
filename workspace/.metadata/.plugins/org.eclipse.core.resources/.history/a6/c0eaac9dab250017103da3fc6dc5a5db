@@ -1,0 +1,29 @@
+package project;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Formatter;
+import java.util.Scanner;
+
+public class Address {
+	public void readFromFile(){
+		try {
+			  File x = new File("account.txt");
+			  Scanner sc = new Scanner(x);
+			  String input = sc.next();
+		}
+		catch (FileNotFoundException e) {
+
+		}
+	}
+	
+	public void writeToFile(String output){
+		try {
+		    Formatter f = new Formatter("account.txt");
+		    f.format("%s", output);		    
+		    f.close();    
+		  } catch (Exception e) {
+		    System.out.println("Error");
+		  }
+	}
+}

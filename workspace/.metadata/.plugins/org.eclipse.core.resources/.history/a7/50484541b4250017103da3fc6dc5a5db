@@ -1,0 +1,22 @@
+package project;
+
+public class ATM {
+
+	public static void main(String[] args){
+		Address A = new Address();
+		float test = Address.balance;
+		A.writeToFile(test);
+		A.readFromFile();
+		
+		
+		float amount = A.amount;
+		if (amount < test){
+			amount -= test;
+			A.writeToFile(test);
+		}
+		else
+			A.writeToFile(test);
+		
+			
+	}
+}

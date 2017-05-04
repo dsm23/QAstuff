@@ -1,0 +1,36 @@
+package FileNonsense;
+
+import java.util.*;
+
+public class WorkingwithFiles {
+
+	public static void main(String[ ] args) {
+		Person David = new Person();
+		Person James = new Person();
+		Person Emily = new Person();
+		Person John = new Person();
+		Person Grace = new Person();
+		
+		David.process("David","programmer",24);
+		James.process("James","accountant",25);
+		Emily.process("Emily","engineer",24);
+		John.process("John","dancer",22);
+		Grace.process("Grace","scientist",23);
+		
+		ArrayList<Person> arr = new ArrayList<Person>();
+		
+		try {
+			
+			Formatter f = new Formatter("test.txt");
+			for (int i = 0;i<5;i++){
+				System.out.println("Hi");
+				//f.format("%s %s %s \r\n", i.name,i.occupation, i.age);
+				f.format(i.name + ", "+i.occupation+ ", "+ i.age + "\r\n");
+				System.out.println(i.name + ", "+i.occupation+ ", "+ i.age);
+			}			
+    		f.close();    
+		} catch (Exception e) {
+		   System.out.println("Error");
+		}
+	}
+}

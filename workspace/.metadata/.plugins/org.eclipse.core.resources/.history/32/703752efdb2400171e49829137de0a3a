@@ -1,0 +1,8 @@
+public class Average extends Holding {
+	String name = "Average";
+	public void Order(float p,int l,int a){
+		price = p;
+		litres = l;
+		area = a;
+	}
+}

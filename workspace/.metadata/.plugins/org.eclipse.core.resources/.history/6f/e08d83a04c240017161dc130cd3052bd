@@ -1,0 +1,8 @@
+package stuff;
+
+public class Car extends Vehicle{	
+	public void Change(){
+		store = 6;
+		fixrate = 2;
+	}
+}

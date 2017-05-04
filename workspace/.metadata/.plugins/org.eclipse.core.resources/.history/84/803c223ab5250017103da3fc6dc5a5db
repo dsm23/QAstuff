@@ -1,0 +1,17 @@
+package project;
+
+public class ATM extends JFrame {
+	
+
+	public static void main(String[] args){
+		Address A = new Address();
+		float test = Address.balance;
+		A.writeToFile(test);
+		A.readFromFile();
+		
+		A.withdraw();
+		
+		
+			
+	}
+}

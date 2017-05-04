@@ -1,0 +1,15 @@
+package project;
+
+import java.io.*;
+import java.util.*;
+
+public class ATM {
+	
+	
+	
+	public static void main(String[] args){
+		Address A = new Addres();
+		String test = "£24.50";
+		writeToFile(test);
+	}
+}
