@@ -1,6 +1,0 @@
-package stuff;
-
-public class Vehicle {
-	int store;
-	int fixrate;
-}

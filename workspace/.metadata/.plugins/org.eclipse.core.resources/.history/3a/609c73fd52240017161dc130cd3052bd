@@ -1,7 +1,0 @@
-public class Dulux {
-	public void Order(p,l,a){
-		int price = p;
-		int litres = l;
-		int area = a;
-	}
-}

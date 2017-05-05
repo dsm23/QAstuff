@@ -1,8 +1,0 @@
-public class Cheapo extends Holding {
-	String name = "Cheapo";
-	public void Order(float p,int l,int a){
-		price = p;
-		litres = l;
-		area = a;
-	}
-}

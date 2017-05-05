@@ -1,0 +1,33 @@
+package JunitTest;
+
+import static org.junit.Assert.*;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import org.junit.Test;
+
+import Blackjack.Operation;
+
+import JunitTest.Test2;
+
+public class TeststuffTest {
+
+	@Test
+	public void test() {
+		Operation O = new Operation();
+		int result = O.calc(18,20);
+		assertEquals(20, result);
+	}
+}
+
+public class Test2 {
+
+	@Test
+	public void test2() {
+		Operation O = new Operation();
+		int result = O.calc(21,18);
+		assertEquals(21, result);
+	}
+}

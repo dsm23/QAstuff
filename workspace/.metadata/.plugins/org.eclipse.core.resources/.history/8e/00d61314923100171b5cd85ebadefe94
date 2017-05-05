@@ -1,0 +1,18 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import stuff.Operation;
+
+public class heattest {
+
+	@Test
+	public void test() {
+		Operation O = new Operation();
+		boolean result = O.process(99,true);
+		assertEquals(true,result);
+	}
+
+}

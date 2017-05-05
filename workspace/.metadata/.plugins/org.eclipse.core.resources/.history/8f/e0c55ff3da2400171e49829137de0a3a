@@ -1,4 +1,0 @@
-public class Holding {
-	float price,count;
-	int litres,area, requiredlitres;
-}

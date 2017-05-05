@@ -1,6 +1,0 @@
-package stuff;
-
-public class Bus extends Vehicle{
-	int store = 9;
-	int fixrate = 3;
-}

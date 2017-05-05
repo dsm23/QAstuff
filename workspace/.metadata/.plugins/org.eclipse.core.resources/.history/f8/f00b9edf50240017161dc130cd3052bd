@@ -1,9 +1,0 @@
-package stuff;
-
-public class Car extends Vehicle{
-	String name = "Car";
-	public void Change(int s, int f){
-		store = s;
-		fixrate = f;
-	}
-}
