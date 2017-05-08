@@ -1,5 +1,5 @@
 # David's GitHub for QA stuff
 
-### I don't care
+### hosting files from QA training
 
-##### Along with test
+##### eclipse work is in workspace
