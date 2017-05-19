@@ -2,18 +2,20 @@
 
 ### hosting files from QA training
 
-##### eclipse work is in workspace
+#### eclipse work is in workspace
 
-For new Repository:
+#### All Javascript projects are in the .zip
 
-* echo "# test" >> README.md
+###### For new Repository:
+
+* echo "# newRepository" >> README.md
 * git init
 * git add README.md
 * git commit -m "first commit"
 * git remote add origin https://github.com/dsm23/test.git
 * git push -u origin master
 
-For existing Repository:
+###### For existing Repository:
 
 * git remote add origin https://github.com/dsm23/test.git
 * git push -u origin master
