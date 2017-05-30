@@ -1,2 +1,4 @@
-docker pull jenkins
-docker run -p 8080:8080 -p 50000:50000 jenkins
+FROM ubuntu:14.04
+
+RUN docker pull jenkins
+RUN docker run -p 8080:8080 -p 50000:50000 jenkins
