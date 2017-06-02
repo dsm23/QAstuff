@@ -1,6 +1,5 @@
 FROM ubuntu:14.04
 
-#Always update your running system
 RUN sudo apt-get update -y
 
 #You may or may not need to run these commands
@@ -29,4 +28,6 @@ RUN sudo tar zxvf /opt/java.tar.gz
 RUN sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_74/bin/java 100
 RUN sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_74/bin/javac 100
 
+RUN javac Hellfire.java
+RUN java Hellfire.class
 
