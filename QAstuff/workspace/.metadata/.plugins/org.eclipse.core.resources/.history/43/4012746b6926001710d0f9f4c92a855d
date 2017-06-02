@@ -1,0 +1,40 @@
+package project;
+
+import java.io.*;
+import java.util.*;
+
+public class Address {
+	
+	static float balance = 1000;
+	public String readFromFile(){
+		try {
+			  File x = new File("account.txt");
+			  Scanner sc = new Scanner(x);
+			  String input = sc.next();
+			  sc.close();
+			  return(input);			  		  
+		}		
+		catch (FileNotFoundException e) {
+			System.out.println("Error");
+		}
+		return "";
+	}
+	
+	public void writeToFile(float output){
+		try {
+		    Formatter f = new Formatter("account.txt");
+		    f.format("%s", output);		    
+		    f.close();    
+		} catch (Exception e) {
+		    System.out.println("WriteError");
+		}
+	}
+	
+	public void withdraw(float amount)
+	{					
+		if (amount < balance){
+			balance -= amount;
+			writeToFile(balance);
+		}		
+	}
+}

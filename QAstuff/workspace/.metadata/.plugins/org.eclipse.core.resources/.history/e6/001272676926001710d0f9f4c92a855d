@@ -1,0 +1,6 @@
+package project;
+
+public class Users {
+	String name;
+	int pin;
+}

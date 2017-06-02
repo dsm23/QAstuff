@@ -1,0 +1,35 @@
+package com.example.tests;
+
+import com.thoughtworks.selenium.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Pattern;
+
+public class javseltest {
+	private Selenium selenium;
+
+	@Before
+	public void setUp() throws Exception {
+		selenium = new DefaultSelenium("localhost", 4444, "*chrome", "http://book.theautomatedtester.co.uk/");
+		selenium.start();
+	}
+
+	@Test
+	public void testJavseltest() throws Exception {
+		selenium.open("/chapter2");
+		assertEquals("Selenium: Beginners Guide", selenium.getTitle());
+		String variableName = selenium.getText("id=find");
+		selenium.open("/chapter1");
+		assertEquals("Selenium: Beginners Guide", selenium.getTitle());
+		selenium.type("id=storetext", "$(variableName)");
+		String variableNameValue = selenium.getEval("variableName");
+		selenium.type("id=multiplewindow", "$(variableNameValue)");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		selenium.stop();
+	}
+}

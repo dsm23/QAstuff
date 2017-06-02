@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="uniquetests" project="UniqueNumbers" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="Tests.uniquetests" time="0.0">
+    <testcase name="test" classname="Tests.uniquetests" time="0.0"/>
+    <testcase name="test2" classname="Tests.uniquetests" time="0.0"/>
+    <testcase name="test3" classname="Tests.uniquetests" time="0.0"/>
+    <testcase name="test4" classname="Tests.uniquetests" time="0.0"/>
+    <testcase name="test5" classname="Tests.uniquetests" time="0.0"/>
+    <testcase name="test6" classname="Tests.uniquetests" time="0.0"/>
+  </testsuite>
+</testrun>
