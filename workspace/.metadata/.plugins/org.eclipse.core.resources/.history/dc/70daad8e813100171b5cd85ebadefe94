@@ -1,0 +1,15 @@
+package JunitTest;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class Teststuff {
+	
+	  @Test
+	  public void evaluatesExpression() {
+	    Operation O = new Operation();
+	    int result = O.calc(18,20)
+	    assertEquals(1, result);
+	  }
+	}
+}

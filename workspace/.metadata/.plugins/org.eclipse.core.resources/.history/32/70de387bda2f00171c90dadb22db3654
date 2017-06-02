@@ -1,0 +1,8 @@
+package selenium;
+
+System.setProperty("webdriver.chrome.driver","C:\\Users\\Administrator\\Downloads\\SeleniumFiles\\Selenium");
+System.setProperty("webdriver.gecko.driver","C:\\Users\\Administrator\\Downloads\\SeleniumFiles\\Selenium");
+
+public class Test {
+
+}

@@ -1,0 +1,270 @@
+package project;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.util.*;
+import java.io.*;
+
+import javax.swing.*;
+
+
+public class ATM extends JFrame {
+
+	static ArrayList<Users> userList = new ArrayList<Users>();	
+	boolean isValid;
+	private JFrame mainFrame;
+	private JLabel headerLabel;
+	private JLabel statusLabel;
+	private JPanel firstPanel;
+	private JPanel secondPanel;
+	private JPanel pinPanel;
+	JTextField pinText = new JTextField(20);
+
+	public ATM(){
+		prepareGUI();
+	}
+
+	private void prepareGUI() {
+		mainFrame = new JFrame("Java SWING Examples");
+		mainFrame.setSize(800, 800);
+		mainFrame.setLayout(new GridLayout(5, 1));
+
+		headerLabel = new JLabel("", JLabel.CENTER);
+		statusLabel = new JLabel("", JLabel.CENTER);
+		statusLabel.setSize(700, 200);
+		mainFrame.addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(WindowEvent windowEvent) {
+
+				System.exit(0);
+
+			}});
+
+
+
+		/*firstPanel = new JPanel();
+		firstPanel.setLayout(new FlowLayout());
+		mainFrame2.add(headerLabel);
+		mainFrame2.add(firstPanel);
+		mainFrame2.add(statusLabel);
+		mainFrame2.setVisible(true);*/
+
+		firstPanel = new JPanel();
+		firstPanel.setLayout(new FlowLayout());
+		secondPanel = new JPanel();
+		secondPanel.setLayout(new FlowLayout());
+		pinPanel = new JPanel();
+		pinPanel.setLayout(new FlowLayout());		
+		mainFrame.add(headerLabel);
+		mainFrame.add(pinPanel);
+		mainFrame.add(firstPanel);
+		mainFrame.add(statusLabel);
+		mainFrame.add(secondPanel);
+		//mainFrame.setVisible(true);
+	}
+
+
+	private void showEvent() {
+		headerLabel.setText("Choose Service");
+
+		JButton withdrawButton = new JButton("Withdraw");
+		JButton balanceButton = new JButton("Display Balance");
+		JButton ExitButton = new JButton("Exit");
+		
+		JButton enterPin = new JButton("PIN");
+		enterPin.addActionListener(new ActionListener(){
+			   public void actionPerformed(ActionEvent ae)
+			   {
+				   
+				  
+			   }
+			}
+		);
+		
+		JButton pTen = new JButton("£10");
+		JButton pTwenty = new JButton("£20");	
+		JButton pThirty = new JButton("£30");
+		JButton pFourty = new JButton("£40");
+		JButton pFifty = new JButton("£50");
+		JButton pSixty = new JButton("£60");
+		JButton pSeventy = new JButton("£70");
+		JButton pEighty = new JButton("£80");
+		JButton pNinety = new JButton("£90");
+		JButton pHundred = new JButton("£100");
+		JButton p2Hundred = new JButton("£200");
+
+		withdrawButton.setActionCommand("Withdraw");
+		balanceButton.setActionCommand("Balance");
+		ExitButton.setActionCommand("Exit");	
+		pTen.setActionCommand("£10");
+		pTwenty.setActionCommand("£20");
+		pThirty.setActionCommand("£30");
+		pFourty.setActionCommand("£40");
+		pFifty.setActionCommand("£50");
+		pSixty.setActionCommand("£60");
+		pSeventy.setActionCommand("£70");
+		pEighty.setActionCommand("£80");
+		pNinety.setActionCommand("£90");
+		pHundred.setActionCommand("£100");
+		p2Hundred.setActionCommand("£200");
+		pinText.setActionCommand("pin");
+		enterPin.setActionCommand("PIN");
+
+		withdrawButton.addActionListener(new BCL());
+		balanceButton.addActionListener(new BCL());
+		ExitButton.addActionListener(new BCL());
+		pTen.addActionListener(new BCL());
+		pTwenty.addActionListener(new BCL());
+		pThirty.addActionListener(new BCL());
+		pFourty.addActionListener(new BCL());
+		pFifty.addActionListener(new BCL());
+		pSixty.addActionListener(new BCL());
+		pSeventy.addActionListener(new BCL());
+		pEighty.addActionListener(new BCL());
+		pNinety.addActionListener(new BCL());
+		pHundred.addActionListener(new BCL());
+		p2Hundred.addActionListener(new BCL());
+		pinText.addActionListener(new BCL());
+		enterPin.addActionListener(new BCL());
+		firstPanel.add(withdrawButton);
+		firstPanel.add(balanceButton);
+		firstPanel.add(ExitButton);
+		pinPanel.add(pinText);
+		pinPanel.add(enterPin);
+		secondPanel.add(pTen);
+		secondPanel.add(pTwenty);
+		secondPanel.add(pThirty);
+		secondPanel.add(pFourty);
+		secondPanel.add(pFifty);
+		secondPanel.add(pSixty);
+		secondPanel.add(pSeventy);
+		secondPanel.add(pEighty);
+		secondPanel.add(pNinety);
+		secondPanel.add(pHundred);
+		secondPanel.add(p2Hundred);
+		
+		mainFrame.setVisible(true);
+		mainFrame.remove(firstPanel);
+		mainFrame.remove(secondPanel);
+	}
+
+	
+	private class BCL implements ActionListener {
+		@Override 
+		public void actionPerformed(ActionEvent ae) {
+			String command = ae.getActionCommand();
+			Address A = new Address();
+			ATM sD = new ATM();
+			switch (command) {
+			case "PIN":
+				
+				 for(Users u : userList)
+					{
+					  
+						if(u.CheckPin(u) = )
+						{
+							mainFrame.remove(pinPanel);
+						}						
+						else
+						{
+							System.out.println("Please enter correct pin");
+						}
+						
+					}
+					
+				
+				break;
+			case "Withdraw":
+				mainFrame.remove(firstPanel);
+				mainFrame.add(secondPanel);
+				statusLabel.setText("Select Amount");		      				
+				break;
+			case "Balance":				
+				float temp = Float.parseFloat(A.readFromFile());
+				statusLabel.setText("£"+String.format( "%.2f", temp));
+				break;
+			case "Exit": 
+				System.exit(0);
+				break;
+			case "£10":	
+				A.withdraw(10f);
+				sD.showEvent();
+				break;
+			case "£20":
+				A.withdraw(20f);
+				sD.showEvent();
+				break;
+			case "£30":
+				A.withdraw(30f);
+				sD.showEvent();
+				break;
+			case "40":
+				A.withdraw(40f);
+				sD.showEvent();
+				break;
+			case "£50":
+				A.withdraw(50f);
+				sD.showEvent();
+				break;
+			case "£60":
+				A.withdraw(60f);
+				sD.showEvent();
+				break;
+			case "£70":
+				A.withdraw(70f);
+				sD.showEvent();
+				break;
+			case "£80":
+				A.withdraw(80f);
+				//mainFrame.remove(secondPanel);
+				//mainFrame.remove(firstPanel);
+				sD.showEvent();
+				break;
+			case "£90":
+				A.withdraw(90f);
+				sD.showEvent();
+				break;
+			case "£100":
+				A.withdraw(100f);
+				sD.showEvent();
+				break;
+			case "£200":
+				if (A.balance >= 200){
+					A.withdraw(200f);
+				}
+				else{
+					statusLabel.setText("Insufficient Funds");
+				}
+				sD.showEvent();
+				break;
+			}		
+		}
+	}
+
+	public static void main(String[] args){
+		ATM sD = new ATM();
+		Users Azim = new Users();
+		Users David = new Users();
+		Users James = new Users();
+			
+		Azim.process("Azim",1357);
+		David.process("David",2345);
+		James.process("James",2468);
+		userList.add(Azim);
+		userList.add(David);
+		userList.add(James);
+		
+		
+		
+		try{
+			Address A = new Address();
+			//A.writeToFile(test);
+			A.readFromFile();
+			sD.showEvent();
+		}
+		catch (Exception  e) {
+			// TODO: handle exception
+		}
+	}
+}

@@ -1,0 +1,17 @@
+package JunitTest;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Blackjack.Operation;
+
+public class TeststuffTest {
+
+	@Test
+	public void test() {
+		Operation O = new Operation();
+		int result = O.calc(18,20);
+		assertEquals(1, result);
+	}
+}

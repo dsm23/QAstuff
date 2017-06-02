@@ -1,0 +1,170 @@
+package phptravelsproject.packagesofproject;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+
+/**
+ * Hello world!
+ *
+ */
+public class AppTest 
+{
+	ExtentReports report;
+	ExtentTest test;
+	WebDriver driver;	
+	// pass scenario
+	@Test
+	public void verifyHomePageTitle() {
+		
+		// where to create the report file
+		report = new ExtentReports("C:\\Users\\Administrator\\Downloads\\davidtestng\\automationreportPOMtest1.html",true);
+
+		// init/start the test
+		test = report.startTest("Verify PHP Travels Title");
+		System.setProperty("webdriver.gecko.driver","C:\\Users\\Administrator\\Downloads\\SeleniumFiles\\Selenium\\geckodriver.exe");		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+
+		// add a note to the test
+		test.log(LogStatus.INFO, "Browser started");
+		driver.get("http://www.phptravels.net/");
+		String title = driver.getTitle();
+		System.out.println(title);
+		if (title.equals("PHPTRAVELS | Travel Technology Partner")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify Title of the home page");
+		} else {
+			test.log(LogStatus.FAIL, "verify Title of the home page");
+		}
+		
+		WebElement loginnav = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[2]/a"));
+		loginnav.click();
+		WebElement loginclick = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[2]/ul/li[1]"));
+		loginclick.click();
+		
+		
+		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[3]/div[1]/form/p/img")));
+		title = driver.getTitle();
+		
+		if (title.equals("Login")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify title of login page");
+		} else {
+			test.log(LogStatus.FAIL, "verify title of login page");
+		}
+		
+		WebElement loginuser = driver.findElement(By.xpath("/html/body/div[3]/div[1]/form/div[4]/div/div[1]/input"));
+		loginuser.sendKeys("user@phptravels.com");
+		WebElement loginpass = driver.findElement(By.xpath("/html/body/div[3]/div[1]/form/div[4]/div/div[2]/input"));
+		loginpass.sendKeys("demouser");
+		loginclick = driver.findElement(By.xpath("/html/body/div[3]/div[1]/form/div[4]/button"));
+		loginclick.click();
+		
+		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[3]/div[3]/div/div[2]/div/div[1]/div[2]/div[3]/h5/strong")));
+		title = driver.getTitle();
+		
+		if (title.equals("My Account")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify Logged in");
+		} else {
+			test.log(LogStatus.FAIL, "verify Logged in");
+		}
+		
+		WebElement selectlogout = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[2]/a"));
+		selectlogout.click();
+		WebElement clicklogout = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[2]/ul/li[2]/a"));
+		clicklogout.click();
+		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[3]/div[1]/form/p/img")));
+		title = driver.getTitle();
+		
+		if (title.equals("Login")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify Logged out");
+		} else {
+			test.log(LogStatus.FAIL, "verify Logged out");
+		}
+		
+		report.endTest(test);
+		report.flush();
+	}
+	// Fail scenario
+	// make this fail to see the screenshot output
+	
+	
+	@Test
+	public void verifyCheckout() throws IOException {
+		
+		report = new ExtentReports("C:\\Users\\Administrator\\Downloads\\davidtestng\\automationreportPOMtest2.html",true);
+
+		// init/start the test
+		test = report.startTest("Verify AutoCkeckout Title");
+		System.setProperty("webdriver.gecko.driver","C:\\Users\\Administrator\\Downloads\\SeleniumFiles\\Selenium\\geckodriver.exe");		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+		
+		// add a note to the test
+		test.log(LogStatus.INFO, "Browser started");
+		driver.get("http://automationpractice.com/index.php");
+		String title = driver.getTitle();
+		System.out.println(title);
+		if (title.equals("My Store")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify Title of the home page");
+		} else {
+			test.log(LogStatus.FAIL, "verify Title of the home page");
+		}
+		
+		WebElement addtoCart = driver.findElement(By.xpath("/html/body/div/div[2]/div/div[2]/div/div[1]/ul[1]/li[2]/div/div[1]/div/a[1]/img"));
+		addtoCart.click();
+		
+		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[3]/div[1]/p/button")));
+		title = driver.getTitle();
+		
+		if (title.equals("Blouse - My Store")) {
+			// report the test as a pass
+			test.log(LogStatus.PASS, "verify Title of the product page");
+		} else {
+			test.log(LogStatus.FAIL, "verify Title of the product page");
+		}
+		
+		WebElement addtoCartpage = driver.findElement(By.xpath("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[3]/div[1]/p/button"));
+		addtoCartpage.click();
+		
+		WebElement gotocheckout = driver.findElement(By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[4]/div[1]/div[2]/div[4]/a/span"));
+		gotocheckout.click();
+		
+		
+		/*if (src != null) {
+			test.log(LogStatus.PASS, "verify logo");
+		} else {
+			test.log(LogStatus.FAIL, "verify logo");
+			File scrFile = ((TakesScreenshot) driver)
+					.getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(scrFile, new File(
+					"C:\\Users\\Administrator\\Downloads\\davidtestng\\imgPOM.jpg"));
+			String image = test.addScreenCapture(
+					"C:\\Users\\Administrator\\Downloads\\davidtestng\\imgPOM.jpg");
+			test.log(LogStatus.FAIL, "verify logo of the application", image);
+		}*/
+		report.endTest(test);
+		report.flush();
+		// driver.quit();
+	}
+}

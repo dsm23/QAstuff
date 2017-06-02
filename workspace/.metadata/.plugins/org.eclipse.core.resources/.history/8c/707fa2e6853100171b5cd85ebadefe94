@@ -1,0 +1,19 @@
+package Tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Blackjack.Operation;
+
+public class uniquetests {
+
+	
+	
+		@Test
+		public void test() {
+			Operation O = new Operation();
+			int result = O.process(1,2,3);
+			assertEquals(6, result);
+		}
+	}
