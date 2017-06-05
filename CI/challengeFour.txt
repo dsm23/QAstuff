@@ -1,0 +1,11 @@
+docker run --name some-mysql -v /home/ubuntu/mysqldirec:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=databasepassword123 -d mysql:8.0
+
+docker ps -a -f status=running
+
+docker exec -it containerID /bin/bash
+
+Ctrl + D
+
+docker pull php
+
+docker run -it -v /home/ubuntu/mysqldirec:/home/testdirec php:7.0-apache bash
