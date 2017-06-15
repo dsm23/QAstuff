@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<style>
+	button,select,option{
+		cursor:pointer;
+	}
+	button{
+		margin:15px 0;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+		<div class="display-2">Pokémon Damage Modifier</div>
+		<form>
+  <fieldset>    
+    <div class="form-group">
+      <label for="inputpoke">Attacking Move Type</label>
+      <select class="form-control" id="inputpoke"> 
+      </select>
+	  <small class="form-text text-muted">Dropdown with all 18 pokemon types</small>
+    </div>
+	  <label for="outputpoke">Defending Pokemon Type</label>
+      <select class="form-control" id="outputpoke">
+      </select>
+	  <small class="form-text text-muted">Dropdown with all 18 pokemon types</small>
+	  <label for="boolpoke">Does the Defending Pokemon have a second Type?</label>
+      <select class="form-control" id="boolpoke" onchange="update()">
+		<option value="false">False</option>
+		<option value="true">True</option>		
+      </select>
+	  <small class="form-text text-muted">Boolean input</small>
+	  <label for="outputpokesecond">Defending Pokemon's Second Type</label>
+      <select class="form-control" id="outputpokesecond" disabled>
+      </select>
+	  <small class="form-text text-muted">Dropdown with all 18 pokemon types</small>
+	  <button type="button" class="btn btn-primary" onclick="printDamageMod()">Submit</button>
+	  <div class="display-4" id="res"></div>
+    </div>
+</form>
+	</div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+		"use strict";
+		
+		function capitalize(s)
+		{
+			return s[0].toUpperCase() + s.slice(1);
+		}
+
+		function uncapitalize(s)
+		{
+			return s[0].toLowerCase() + s.slice(1);
+		}		
+		
+		var poketype = {"normal":1,"fighting":2,"flying":3,"poison":4,"ground":5,"rock":6,"bug":7,"ghost":8,"steel":9,"fire":10,"water":11,"grass":12,"electric":13,"psychic":14,"ice":15,"dragon":16,"dark":17,"fairy":18}
+		
+		var pokearr = {"Normal":{},"Fighting":{},"Flying":{},"Poison":{},"Ground":{},"Rock":{},"Bug":{},"Ghost":{},"Steel":{},"Fire":{},"Water":{},"Grass":{},"Electric":{},"Psychic":{},"Ice":{},"Dragon":{},"Dark":{},"Fairy":{}};
+		
+		function writeout(){
+			for (var x in pokearr){
+				$(".container").append("<h4>"+capitalize(x)+"</h4>");
+				$(".container").append("<p> ");
+				for (var c in pokearr[x]){
+					$(".container").append(c +" "+pokearr[x][c]+ " ");			
+					}
+				$(".container").append(" </p>");
+			}
+		}
+		
+		for (var j in poketype){
+			var xhr = $.ajax({
+				 type: 'GET',
+				 url: "http://pokeapi.co/api/v1/type/"+poketype[j]+"/",
+				 dataType: "json",
+				 success: function (data) {
+					console.log(xhr.status);
+					console.log(xhr.readyState);
+					for (var n in poketype){
+						pokearr[data.name][n] = 1;
+					}
+					for (var k in data.ineffective){			
+						pokearr[data.name][data.ineffective[k].name] = 0.5;
+					}					
+					for (var l in data.super_effective){
+						pokearr[data.name][data.super_effective[l].name] = 2;
+					}
+					for (var m in data.no_effect){
+						pokearr[data.name][data.no_effect[m].name] = 0;
+					}		
+				},
+			});
+		}
+		
+		function fillSelects(){
+			for (var indx in pokearr){
+				document.getElementById("inputpoke").innerHTML += "<option value='"+indx+"'>"+indx+"</option>";
+				document.getElementById("outputpoke").innerHTML += "<option value='"+indx+"'>"+indx+"</option>";
+				document.getElementById("outputpokesecond").innerHTML += "<option value='"+indx+"'>"+indx+"</option>";
+			}
+		}
+		fillSelects();
+		
+		function printDamageMod(){
+			var att = document.getElementById("inputpoke").value;
+			var def = uncapitalize(document.getElementById("outputpoke").value);
+			var bool = document.getElementById("boolpoke").value;
+			var secdef = uncapitalize(document.getElementById("outputpokesecond").value);
+			
+			var  mult = pokearr[att][def] * pokearr[att][secdef];
+			
+			if (def == secdef){
+				document.getElementById("res").innerHTML = "Please choose different defending types or change second type to false";
+			}
+			else if (bool.trim() == "true"){
+				document.getElementById("res").innerHTML = mult+"x modifier";
+			}			
+			else{
+				document.getElementById("res").innerHTML = pokearr[att][def] +"x modifier";
+			}
+		}
+		
+		function update(){
+			var bool = document.getElementById("boolpoke");
+			var boolval = bool.value;
+			if (bool.value.trim() == "true"){
+				$("#outputpokesecond").removeAttr('disabled');
+			}
+			else {
+				$("#outputpokesecond").attr('disabled',true);
+			}
+		}
+	</script>
+  </body>
+</html>

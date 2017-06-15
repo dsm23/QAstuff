@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style>
+    button{
+    	cursor:pointer;
+    	margin:15px 0;
+    }
+    div {
+    	margin:15px 0;
+    }
+    </style>
+
+	<title>Rock Paper Scisors game</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-4">
+				<h2>Player's Score:</h2>
+				<h4 id="playerscore">0</h4>
+			</div>
+			<div class="col-4">
+				<h2>Computer's Score:</h2>
+				<h4 id="compscore">0</h4>
+			</div>
+			<div class="col-4">
+				<h2>Games Played:</h2>
+				<h4 id="gameCounter">0</h4>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-2">
+				<h5>Rock:</h5>
+				<h6 id="RockCount">0</h6>
+			</div>
+			<div class="col-2">
+				<h5>Paper:</h5>
+				<h6 id="PaperCount">0</h6>
+			</div>
+			<div class="col-2">
+				<h5>Scissors:</h5>
+				<h6 id="ScissorsCount">0</h6>
+			</div>
+			<div class="col-2">
+				<h5>Lizard:</h5>
+				<h6 id="LizardCount">0</h6>
+			</div>
+			<div class="col-2">
+				<h5>Spock:</h5>
+				<h6 id="SpockCount">0</h6>
+			</div>
+		</div>
+		<form class="form-group">
+			<select class="form-control" id="input" placeholder="enter your move">			
+				<option value="Rock">Rock</option>
+				<option value="Paper">Paper</option>
+				<option value="Scissors">Scissors</option>
+				<option value="Lizard">Lizard</option>
+				<option value="Spock">Spock</option>
+			</select>
+			<button class="btn btn-primary btn-lg" type=button onClick="Run()">Go!</button>			
+		</form>	
+		<div class="row text-center">	
+			<div class="col-2" >
+				<h2>Games Drawn:</h2>
+				<h4 id="draws">0</h4>
+			</div>
+			<div class="col-2" >
+				<h2>% Drawn:</h2>
+				<h4 id="drawPercent">0</h4>
+			</div>
+			<div class="col-2" >
+				<h2>Games Won (Human):</h2>
+				<h4 id="humanWins">0</h4>
+			</div>
+			<div class="col-2" >
+				<h2>% Wins (Human):</h2>
+				<h4 id="winHumanPercent">0</h4>
+			</div>
+			<div class="col-2" >
+				<h2>Games Won (Computer):</h2>
+				<h4 id="computerWins">0</h4>
+			</div>
+			<div class="col-2" >
+				<h2>% Wins (Computer):</h2>
+				<h4 id="winComputerPercent">0</h4>
+			</div>
+		</div>
+		<div class="row text-center">
+		
+			<div class="col-6">
+				<h2>Player's Choice:</h2>
+				<h4 id="player"></h4>
+			</div>
+			<div class="col-6">
+				<h2>Computer's Choice (Random):</h2>
+				<h4 id="comp"></h4>
+			</div>
+			<div class="col-12">
+				<h2 class="display-1" id="res"></h2>
+			</div>			
+		</div>
+ 	</div>
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script>
+
+var	Sc = {0:"Scissors cuts Paper" , 1:"Scissors decapitates"};
+var Pa = {0:"Paper covers Rock", 1:'Paper disproves Spock'};
+var	Ro = {0:'Rock crushes Scissors', 1:'Rock crushes Lizard'};
+var Li = {0:'Lizard eats Paper', 1:'Lizard poisons Spock'};
+var Sp = {0:'Spock smashes Scissors', 1:"Spock vaporises Rock"};
+
+//from player's perspective
+
+
+
+var scissorsarr=[2,Sc[0],Ro[0],Sc[1],Sp[0]];
+var paperarr=[Sc[0],2,Pa[0],Li[0],Pa[1]];
+var rockarr=[Ro[0],Pa[0],2,Ro[1],Sp[1]];
+var lizardarr=[Sc[1],Li[0],Ro[1],2,Li[1]];
+var spockarr=[Sp[0],Pa[1],Sp[1],Li[1],2];
+
+var scissorsarr2=[2,1,0,1,0];
+var paperarr2=[0,2,1,0,1];
+var rockarr2=[1,0,2,1,0];
+var lizardarr2=[0,1,0,2,1];
+var spockarr2=[1,0,1,0,2];
+
+var list = {"Scissors":0, "Paper":1, "Rock":2, "Lizard":3,"Spock":4};
+
+var obj = {0:scissorsarr, 1:paperarr, 2:rockarr, 3:lizardarr,4:spockarr};
+var obj2 = {0:scissorsarr2, 1:paperarr2, 2:rockarr2, 3:lizardarr2,4:spockarr2};
+
+var computerPicker = ["Rock", "Paper", "Scissors","Lizard","Spock"];
+
+
+function Run(){
+	var result = document.getElementById("input");	
+	document.getElementById('player').innerHTML = result.value;
+	var comp = computerPicker[Math.floor(Math.random()*5)];
+	document.getElementById('comp').innerHTML = comp;
+	calculate(result.value,comp);
+	gameStats();	
+}
+
+function calculate(userInput,computerChoice){
+	var playeroption = list[userInput];
+	var compoption = list[computerChoice];
+	
+	document.getElementById('gameCounter').innerHTML++;
+
+	if (obj[playeroption][compoption] == 2){
+		document.getElementById('res').innerHTML = "Draw";
+		document.getElementById('draws').innerHTML++;
+	}	
+	else{
+		document.getElementById('res').innerHTML = obj[playeroption][compoption];
+	}
+
+	
+
+	if (obj2[playeroption][compoption] == 1){
+		document.getElementById('playerscore').innerHTML++;
+		document.getElementById('humanWins').innerHTML++;
+		document.getElementById('res').innerHTML +=".\r\n Player Wins!";
+	}
+	else if (obj2[playeroption][compoption] == 0){
+		document.getElementById('compscore').innerHTML++;
+		document.getElementById('computerWins').innerHTML++;
+		document.getElementById('res').innerHTML +=".\r\n Computer Wins!";
+	}
+}
+
+function gameStats(){
+var score = document.getElementById('playerscore').innerHTML;
+var compScore = document.getElementById('compscore').innerHTML;
+var played = document.getElementById('gameCounter').innerHTML;
+var drawn = played - score - compScore / 100;
+var humanWins = (score / played) * 100;
+var computerWins = (compScore / played) * 100;
+
+var userSelection = document.getElementById("input").value;
+
+	document.getElementById(userSelection + "Count").innerHTML++;
+	
+
+document.getElementById('drawPercent').innerHTML = Math.round(drawn,2) + "%";
+document.getElementById('winHumanPercent').innerHTML = Math.round(humanWins,2) + "%";
+document.getElementById('winComputerPercent').innerHTML = Math.round(computerWins,2) + "%";
+
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<style>
+	div {
+		margin: 15px 0;
+	}
+	button{
+		cursor:pointer;
+	}
+	</style>
+  </head>
+  <body>
+	<div class ="container">
+		<div class="display-3">Choose Wisely</div>		
+		<div class="col">
+			<textarea id="txtarea" class="form-control" rows="5" placeholder="Enter text to become a paragraph"></textarea>
+		</div>
+		
+		<div class="text-center">
+			<button type="button" class="btn btn-primary btn-lg" onclick="addpara()">Add Paragraph</button>
+			<button type="button" class="btn btn-secondary btn-lg" onclick="changepara()">Change Paragraph</button>
+			<button type="button" class="btn btn-success btn-lg" onclick="removepara()">Delete Paragraph</button>
+		</div>
+
+		<div class="text-center" id="res">
+		</div>
+		
+	</div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+	var arr=[];
+	
+	function writeout(){
+		document.getElementById("res").innerHTML = "";
+		for(var i = 0; i< arr.length; i++){
+			document.getElementById("res").innerHTML += "<p>" + arr[i] + "</p>";
+			//$("#res").append("<p>" + arr[i] + "</p>");
+		}
+		document.getElementById("txtarea").value="";
+	}	
+	
+	function addpara() {
+		arr.push(document.getElementById("txtarea").value);
+		writeout();
+	}
+
+	function removepara() {
+		arr.pop();
+		writeout();
+	}
+	function changepara() {
+		arr[arr.length-1] = document.getElementById("txtarea").value;
+		writeout();
+	}
+	
+	
+	</script>	
+  </body>
+</html>

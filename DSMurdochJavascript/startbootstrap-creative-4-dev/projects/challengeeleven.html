@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<style>
+	div, form {
+		margin: 30px 0;
+	}
+	#res{
+		cursor:default;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+		<div class="display-3">Garage Console</div>
+		<form id="thisform">
+		  <fieldset>			
+			<div class="form-group">			  
+			  <input type="text" class="form-control" id="console" rows="20" autofocus>
+			  <small id="emailHelp" class="form-text text-muted">Admin Console</small>
+			</div>						
+			<button type="button" class="btn btn-primary" onclick="init()">Submit</button>
+		  </fieldset>
+		</form>
+		<textarea id="res" class="form-control" rows="20" disabled></textarea>
+	</div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+		"use strict";
+		var Car = function(name,price,faults,owner){
+			this.name = name;
+			this.price = price;
+			this.faults = faults;
+			this.owner = owner;
+		}		
+	   
+		var Merc = new Car("Mercedes", 4, false,"YOURREG");
+		var Mini = new Car("BMW", 5, true,"XX66TCE");
+		
+		var garagecars = [Merc,Mini];
+		var allcars = [Merc,Mini];
+		var max = 5;
+		var nightcost = 20;
+	   
+		console.log(Merc);
+		console.log(Mini);
+		
+		function add(arr){
+			allcars.push(new Car(arr[2],arr[4],false,arr[3]));
+			document.getElementById("res").innerHTML += arr[2] + " has been added to the available list of cars" + "\n";
+		}
+		
+		function bill(arr){			
+			for (var i in garagecars){				
+				if (garagecars[i].owner.toLowerCase() == arr[1].toLowerCase()){
+					document.getElementById("res").innerHTML += garagecars[i].name + "-" + garagecars[i].owner + ", " + "Bill: £" + (garagecars[i].price*nightcost).toFixed(2) + "\n";
+				}
+			}
+		}
+		
+		function check(arr){
+			function insert(x){
+				for (var i in allcars){
+					console.log(allcars[i].name);
+					if (allcars[i].owner.toLowerCase() == x.toLowerCase()){
+						garagecars.push(allcars[i]);
+						document.getElementById("res").innerHTML += allcars[i].name + " has been added to the Garage" + "\n";
+						return;
+					}
+				}
+			}
+			function out(x){
+				for (var i in garagecars){
+					if (garagecars[i].owner.toLowerCase() == x.toLowerCase()){
+						garagecars.splice(i,1);
+						document.getElementById("res").innerHTML += garagecars[i].name + " has been removed from the Garage" + "\n";
+						return;
+					}
+				}
+			}
+			if (arr[1] == "in"){
+				insert(arr[2]);
+			}
+			else if (arr[1] == "out"){
+				out(arr[2]);
+			}
+			else {
+				document.getElementById("res").innerHTML += "I don't know what to do with that, I don't have super cow powers" + "\n";
+			}
+		}
+		
+		function clear(){
+			document.getElementById("res").innerHTML = "";
+		}
+		
+		function garage(arr){
+			function empty(){
+				garagecars = [];
+			}
+			function changeLimit(x){
+				max = x;
+				document.getElementById("res").innerHTML += "Garage Limit has been changed to " + max + "\n";
+			}
+			if (arr[1] == "empty"){
+				empty();
+			}
+			else if (arr[1] == "changeLimit"){
+				changeLimit(arr[2]);
+			}
+			else {
+				document.getElementById("res").innerHTML += "I don't know what to do with that, I don't have super cow powers" + "\n";
+			}
+		}
+		
+		function output(arr){			
+			if (arr[1] == "Garage"){
+				console.log(garagecars);
+				for (var i in garagecars){
+					document.getElementById("res").innerHTML += garagecars[i].name+"-"+garagecars[i].owner+"\n";
+				}
+			}
+			else if (arr[1] == "limit"){
+				document.getElementById("res").innerHTML += "Garage Limit: "+ max + "\n";
+			}
+			else {
+				document.getElementById("res").innerHTML += "I don't know what to do with that, I don't have super cow powers" + "\n";
+			}
+		}
+		
+		function init(){
+			var input = document.getElementById("console");
+			var temp = input.value;
+			var consolearray = temp.split(" ");
+			document.getElementById("thisform").reset();
+			switch(consolearray[0]){
+				case "add":
+					add(consolearray);
+					break;
+				case "bill":
+					bill(consolearray);
+					break;
+				case "check":
+					check(consolearray);
+					break;
+				case "clear":
+					clear();
+					break;
+				case "garage":
+					garage(consolearray);
+					break;
+				case "output":
+					output(consolearray);
+					break;
+				default:
+					document.getElementById("res").innerHTML += "I don't know what to do with that, I don't have super cow powers" + "\n";
+			}
+			$("#console").focus();
+		}
+	</script>
+  </body>
+</html>

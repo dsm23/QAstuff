@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+	<title></title>
+	<style>
+	hr {
+		margin-top:10px;
+		margin-bottom:30px;
+	}
+	button,option,select {
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="display-3 text-center">Garage</div>
+		<form>
+			<fieldset>
+				<legend>Input Car</legend>
+				<div class="form-group">
+					<label for="carname">Name of Car</label> <input class="form-control" id="carname" placeholder="Enter car name" type="text">
+				</div>
+				<div class="form-group">
+					<label for="carprice">Cost per Night</label> <input class="form-control" id="carprice" placeholder="Enter price" type="text">
+				</div>
+				<div class="form-group">
+					<label for="carfaults">Are there any faults?</label> <select class="form-control" id="carfaults" type="text">
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="carowner">Number Plate</label> <input class="form-control" id="carowner" placeholder="Enter owner" type="text">
+				</div>
+			</fieldset>
+			<button type="button" class="btn btn-primary" onclick="insertGarage()">Submit</button>
+		</form>
+		<hr>
+		<br>
+		<div class="display-4 text-center">Currently stored in the Garage</div>
+		<hr>
+		<div class="row text-center">
+				<div class="col-3">
+					<h4>Car Model</h4>
+				</div>
+				<div class="col-3">
+					<h4>Car Bill</h4>
+				</div>
+				<div class="col-3">
+					<h4>Does the Car have faults?</h4>
+				</div>
+				<div class="col-3">
+					<h4>Owner</h4>
+				</div>
+			</div>
+			<hr>
+		<div id="garage" class="text-center">			
+		</div>
+		<form>
+			<fieldset>
+				<legend>Input Car</legend>
+				<div class="form-group">
+					<label for="carname">Name of Car</label>
+					<select class="form-control" id="removedata" type="text">
+						<option value="0">Merc-David</option>
+						<option value="1">BMW-James</option>
+					</select>
+				</div>
+			</fieldset>
+			<button type="button" class="btn btn-primary" onclick="removeGarage()">Remove</button>
+		</form>
+		
+	</div><!-- jQuery first, then Tether, then Bootstrap JS. -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
+	</script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+	</script> 
+	<script>
+		"use strict";
+	   
+		var Car = function(name,price,faults,owner){
+			this.name = name;
+			this.price = price;
+			this.faults = faults;
+			this.owner = owner;
+		}		
+	   
+		var Merc = new Car("Mercedes", 23, false,"YOUR REG");
+		var Mini = new Car("BMW", 13, true,"XX66 TCE");
+		
+		var arr = [Merc,Mini];
+		writeOut();
+	   
+		function insertGarage(){
+			var nm = document.getElementById("carname").value;
+			var pr = document.getElementById("carprice").value;
+			var fau = document.getElementById("carfaults").value;
+			var own = document.getElementById("carowner").value;
+			var temp = new Car(nm,pr,fau,own);
+			arr.push(temp);
+			writeOut();
+		}
+		
+		function removeGarage(){
+			arr.splice(document.getElementById("removedata").value, 1);
+			writeOut();
+		}
+		
+		function writeOut(){
+			document.getElementById("garage").innerHTML = "";
+			document.getElementById("removedata").innerHTML = "";
+			for (var i in arr){
+				document.getElementById("garage").innerHTML += "<div class='row'><div class='col-3'>"+arr[i].name+"</div><div class='col-3'>"+"£"+arr[i].price+"</div><div class='col-3'>"+arr[i].faults+"</div><div class='col-3'>"+arr[i].owner+"</div></div>";
+				document.getElementById("removedata").innerHTML += "<option value='"+i+"'>"+arr[i].name+"-"+arr[i].owner+"</option>";
+				console.log(i);
+			}			
+		}
+		
+		var a = console.prompt("Hello: ");
+		console.log(a);
+		
+	</script>
+</body>
+</html>

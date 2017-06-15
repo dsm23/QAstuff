@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<style>
+		button {
+			cursor:pointer;
+		}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+		<form>
+		  <fieldset>
+			<legend class="display-4">Person</legend>
+			<div class="form-group">
+			  <label for="name">Name</label>
+			  <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" value="David">			  
+			</div>
+			<div class="form-group">
+			  <label for="age">Age</label>
+			  <input type="text" class="form-control" id="age" placeholder="Enter age" value="24">
+			</div>
+			<div class="form-group">
+			  <label for="occupation">Occupation</label>
+			  <input type="text" class="form-control" id="occupation" placeholder="Enter occupation" value="QA Consultant">
+			</div>			
+			<button type="button" class="btn btn-primary" onclick="dochange()">Submit</button>
+		  </fieldset>
+		</form>
+		
+		<h1 class="text-center" id="result"></h1>
+	</div>
+	
+	
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+	var Person = new Object();
+	function dochange(){
+		Person.name = document.getElementById("name").value;
+		Person.age = document.getElementById("age").value;
+		Person.occupation = document.getElementById("occupation").value;
+		
+		if (Person.age > 19 && Person.age < 41){
+			document.getElementById("result").innerHTML="Person is between 20 and 40 years old!"
+		}
+		else{
+			document.getElementById("result").innerHTML="Person is NOT between 20 and 40 years old!"
+		}
+	}
+	</script>
+  </body>
+</html>

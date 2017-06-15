@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<style>
+	button,option,select{
+		cursor:pointer;
+	}
+	</style>
+  </head>
+  <body>
+	<div id="tar" class="container">
+		<div class="display-3">President's Alive During Which Years? (Only Works in Mozilla Firefox)</div>
+		<form>
+			  <fieldset>
+				<legend>Choose year</legend>				
+				<div class="form-group">				  
+				  <select class="form-control" id="inputselect" type="text">
+				  </select>
+				</div>				
+				<button type="button" class="btn btn-primary" onclick=printPres()>Submit</button>
+			  </fieldset>
+			</form>
+		<div id="res"></div>
+	</div>
+    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+	"use strict";
+	
+	var arr=[];
+	var resultsobj = {};
+
+	
+	function setupinit()
+	{	
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "presidents.txt", false);
+		
+		xhttp.send();
+		console.log(xhttp.status);
+	  
+		var str = xhttp.responseText;	
+		arr = str.split("\n")
+		arr.splice(0,1);
+		console.log(arr);
+		
+		for (var i = 1732; i <= 2017;i++){
+			document.getElementById("inputselect").innerHTML += "<option value='"+i+"'>"+i+"</option>";
+		}
+	}
+	
+	function splitarrs()
+	{	
+		for (var i in arr){
+			arr[i] = arr[i].split(",");
+			for (var j in arr[i]){
+				if(arr[i][3] == " "){
+					arr[i][3] = " 2017";
+				}
+				arr[i].splice(4,1);				
+			}			
+		}		
+	}
+	
+	function isolateYears(x,y)
+	{
+		var test = arr[x][y].split("");
+		var temp =[];
+		for (var indx = 5; indx > 0; indx--){
+				
+			temp.push(test[test.length-indx]);
+		}		
+		var year = temp.join("");
+		arr[x][y] = year;
+		console.log(year);
+		return year;
+	}
+	
+	function allYearsBetween(birth,death,president){
+		for (var year = birth; year <= death; year++)
+		{			
+			resultsobj[year].push(arr[president][0]);
+		}
+	}
+	
+	function fillObject(){
+		console.log("birth dates");
+		for (var i in arr){			
+			var birthyear = isolateYears(i,1);
+			var deathyear = isolateYears(i,3);
+			allYearsBetween(birthyear.trim(),deathyear.trim(),i);
+		}
+	}
+	
+	function setupObject()
+	{	
+		for (var k =1732; k <=2017; k++){
+			resultsobj[k]=[];
+		}
+		console.log(resultsobj);
+	}
+	
+	function calculate(){
+		for (var i =1732; i <= 2017; i++){			
+			if (resultsobj[i].length == 18){
+				console.log(i);
+			}
+		}
+	}
+	
+	function printPres(){
+		document.getElementById("res").innerHTML="";
+		var input = document.getElementById("inputselect").value;		
+		for (var i = 0; i < resultsobj[input].length;i++){			
+			document.getElementById("res").innerHTML += "<p>"+resultsobj[input][i]+"</p>";
+		}
+	}
+
+	setupinit();
+	splitarrs();
+	setupObject();
+	fillObject();
+	calculate();
+	</script>
+  </body>
+</html>
