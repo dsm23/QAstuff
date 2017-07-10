@@ -7,3 +7,19 @@ Confluence
 BitBucket
 Nexus
 Jenkins
+
+Hi all,
+ 
+As most of you know you have interviews for a testing role at the Home Office. So with that being said I know you all have different skill sets so I’m going to give you a couple of tasks to do to get ready  as well as having a mock interview with you on the 12th.
+ 
+As for the tasks, I would like you all to have a look at creating a test using Selenium and Junit on the Auto trader website. What I would like this test to do is to take some input data and search Auto trader for that data. i.e. If the input data was Make: Aston Martin and Model:DB5 your test would be able to go on the website and do a search. I would a link to a GitHub with this project in by Tuesday morning so I can give you some pointers on anything for you to work on.
+ 
+The other task I would like you to do is to do some research on Jmeter, Cucumber, Postman, and JSON in terms of tech and Jira,Confluence,Bitbucket,Nexus and Jenkins in terms of tools.
+ 
+If you guys have any issues or questions please don’t hesitate to email or ring me anytime including over the weekend.
+ 
+Finally can you all email me a time that you would like your interview on Tuesday this will be on a first come first served basis.
+ 
+Thanks
+ 
+Ashley
